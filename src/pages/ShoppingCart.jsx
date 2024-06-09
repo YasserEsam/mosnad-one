@@ -65,9 +65,9 @@ const ShoppingCart = () => {
       <div className="cart-summary">
         <p>Total Items: {getTotalItems()}</p>
         <p>Total Price: ${getTotalPrice().toFixed(2)}</p>
-        <button className="checkout-button">
-          <Link to="/checkout">Checkout</Link>
-        </button>
+        <Link to="/checkout" className="checkout-button">
+          Checkout
+        </Link>
       </div>
     </div>
   );

@@ -93,7 +93,7 @@
 
 .cart-summary p {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .checkout-button {
@@ -104,7 +104,6 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 10px auto;
 }
 
 .checkout-button:hover {

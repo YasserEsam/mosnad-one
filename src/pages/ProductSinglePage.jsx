@@ -9,10 +9,6 @@ const ProductSinglePage = () => {
 
   const { addToCart } = useCart(); // Get addToCart function from CartContext
 
-  const handleAddToCart = () => {
-    addToCart(product, 1); // Add the product to the cart with a quantity of 1
-  };
-
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((response) => response.json())
@@ -26,8 +22,24 @@ const ProductSinglePage = () => {
     return <div>Loading...</div>;
   }
 
+  return (
+    <div className="product-details">
+      <ProductImages images={product.images} title={product.title} />
+      <ProductInfo product={product} addToCart={addToCart} />
+    </div>
+  );
+};
+
+const ProductImages = ({ images, title }) => (
+  <div className="product-images">
+    {images.map((image, index) => (
+      <img key={index} src={image} alt={title} />
+    ))}
+  </div>
+);
+
+const ProductInfo = ({ product, addToCart }) => {
   const {
-    images,
     title,
     price,
     category,
@@ -36,24 +48,22 @@ const ProductSinglePage = () => {
     description,
   } = product;
 
+  const handleAddToCart = () => {
+    addToCart(product, 1);
+    alert("Successfully Added");
+  };
+
   return (
-    <div className="product-details">
-      <div className="product-images">
-        {images.map((image, index) => (
-          <img key={index} src={image} alt={title} />
-        ))}
-      </div>
-      <div className="product-info">
-        <h2 className="product-name">{title}</h2>
-        <h3 className="product-price">${price.toFixed(2)}</h3>
-        <p className="product-category">Category: {category}</p>
-        <p className="product-rating">Rating: {rating}</p>
-        <p className="product-discount">Discount: {discountPercentage}%</p>
-        <p className="product-description">{description}</p>
-        <button className="add-to-cart-button" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
-      </div>
+    <div className="product-info">
+      <h2 className="product-name">{title}</h2>
+      <h3 className="product-price">${price.toFixed(2)}</h3>
+      <p className="product-category">Category: {category}</p>
+      <p className="product-rating">Rating: {rating}</p>
+      <p className="product-discount">Discount: {discountPercentage}%</p>
+      <p className="product-description">{description}</p>
+      <button className="add-to-cart-button" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 };
